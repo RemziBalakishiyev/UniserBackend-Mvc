@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CategoryListDto>
+@section style {
+
+    <link href="~/css/AdminStyle.css" rel="stylesheet" />
+}
+<div>
+    <div class="row d-flex justify-content-center w-100 align-items-center">
+        <div class="card custom-card shadow my-3">
+            <div class="card-header text-center bg-info">
+                <h1>Category Form</h1>
+            </div>
+            <div class="card-body">
+                <form  >
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" id="categoryName" name="Name" placeholder="Food, Vegatables and etc.">
+                    </div>
+                    <div class="d-flex flex-row  ">
+                        <button type="button" id="addBtn"  class="btn btn-primary w-50 mx-1">Add</button>
+                        <button class="btn btn-success w-50 mx-1">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center custom-category-list ">
+        <ul class="list-group list-group-flush w-50">
+
+            @foreach (var category in Model)
+            {
+                <li class="list-group-item">@category.Name</li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/js/AdminJs/Category.js"></script>
+}

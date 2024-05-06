@@ -1,0 +1,19 @@
+﻿*{
+    margin:0;
+    box-sizing:border-box;
+}
+
+.custom-card{
+    width:80%;
+    height:240px;
+    padding:0;
+}
+
+.custom-category-list{
+    border:1px solid #000000;
+    padding:16px;
+    width:80%;
+    margin-inline: auto;
+    border-radius:12px;
+
+}

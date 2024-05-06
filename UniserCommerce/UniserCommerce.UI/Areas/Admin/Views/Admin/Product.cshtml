@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-center p-2 card mx-auto shadow" style="width:800px">
+    <div class="row justify-content-end p-2">
+        <button class="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#productModal">Add</button>
+    </div>
+    <table id="productTable" class="table table-striped table-bordered ">
+        <thead class="bg-primary text-light">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Stock In Hand</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div class="modal"  tabindex="-1" id="productModal" tabindex="-1"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 700px;">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <input type="type" name="name" id="test" value="12" />
+            <div class="modal-body">
+                <form class="row">
+                    <div class="mb-3 col-4">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productName" placeholder="Iphone 14,Samsung galaxy etc">
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" placeholder="0">
+                    </div>
+
+                    <div class="mb-3 col-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="price" placeholder="0">
+                    </div>
+                    <div class="col-6">
+                        <label for="size" class="form-label">Category</label>
+                        <select class="form-select" aria-label="Default select example" id="categorySelect">
+                        </select>
+                    </div>
+                   
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="addProductBtn" > Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script src="~/js/AdminJs/Product.js"></script>
+    <script>
+
+
+        $("#addProductBtn").on("click", AddNewProduct);
+
+
+        function AddNewProduct() {
+
+
+            var product = {
+                ProductName: $("#productName").val(),
+                Quantity: $("#quantity").val(),
+                Price: $("#price").val(),
+                CategoryId: $("#categorySelect").val()
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Admin/AddProduct",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(product),
+                success: function (response) {
+                    if (response.status) {
+                        $("#productModal").hide();
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while adding the category.");
+                }
+            })
+
+
+
+        }
+    </script>
+    <script src="~/js/AdminJs/ProductDatatable.js"></script>
+}
