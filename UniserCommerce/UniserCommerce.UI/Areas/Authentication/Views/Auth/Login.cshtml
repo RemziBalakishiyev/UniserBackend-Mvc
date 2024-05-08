@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Areas/Authentication/Views/Shared/_AuthLayout.cshtml";
+}
+
+<form class="card shadow p-3">
+    <div class="mb-3">
+        <label for="userName" class="form-label">User Name</label>
+        <input type="text" class="form-control" id="userName">
+
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="text" class="form-control" id="password">
+    </div>
+    <button type="button" class="btn btn-primary" id="register">Sign In</button>
+</form>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#register").click(function () {
+
+                var userDto = {
+                    userName: $("#userName").val(),
+                    password: $("#password").val()
+                }
+                $.ajax({
+                    async: true,
+                    url: "/Authentication/Auth/Login",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(userDto),
+                  
+                });
+            })
+        })
+    </script>
+}

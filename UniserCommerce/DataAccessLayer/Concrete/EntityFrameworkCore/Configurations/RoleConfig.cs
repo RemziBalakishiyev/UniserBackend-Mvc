@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete.EntityFrameworkCore.Configurations
 {
-    public class ReportProductConfig : IEntityTypeConfiguration<ProductReport>
+    internal class RoleConfig : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<ProductReport> builder)
+        public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.HasNoKey();
-            builder.ToView("VW_PRODUCT_REPORT");
+            builder.Property(x => x.RoleName).IsRequired(true);
+            builder.HasMany(x => x.UserRoles).WithOne(x => x.Role).HasForeignKey(x => x.RoleId);
+
         }
     }
 }

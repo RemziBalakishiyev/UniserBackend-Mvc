@@ -12,7 +12,7 @@ namespace Entity.Concrete
 
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
-        public int MyProperty { get; set; }
+        public string PasswordSalt { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
     }
 }

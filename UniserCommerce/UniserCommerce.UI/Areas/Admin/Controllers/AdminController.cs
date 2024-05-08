@@ -1,21 +1,32 @@
 ﻿using BusinessLogic.Abstract;
 using BusinessLogic.Dtos;
+using DataAccessLayer.Abstract;
+using Entity.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using UniserCommerce.UI.Filters;
 
 namespace UniserCommerce.UI.Areas.Admin.Controllers
 {
     [Area("admin")]
+    [RolesAuthorizationFilter("admin")]
     public class AdminController : Controller
     {
 
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
+       
 
         public AdminController(ICategoryService categoryService,
                                IProductService productService)
+
         {
             _categoryService = categoryService;
             _productService = productService;
+            
         }
 
         [HttpGet]
@@ -67,5 +78,8 @@ namespace UniserCommerce.UI.Areas.Admin.Controllers
             await _productService.AddAsync(product);
             return Json(new { message = "Category added", status = true });
         }
+
+   
+
     }
 }

@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container p-3">
+
+        <form>
+            <div class="mb-3">
+                <label for="userName" class="form-label">User Name</label>
+                <input type="text" class="form-control" id="userName">
+
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="text" class="form-control" id="password">
+            </div>
+            <button type="button" class="btn btn-primary" id="login">Sign In</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#register").click(function () {
+
+            var userDto = {
+                userName: $("#userName").val(),
+                password: $("#password").val()
+            }
+            $.ajax({
+                async: true,
+                url: "/Admin/Admin/Login",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(userDto),
+                success: function (response) {
+                    console.log(response)
+                },
+                error: function () {
+                    alert("An error occurred while adding the category.");
+                }
+            });
+        })
+    })
+</script>

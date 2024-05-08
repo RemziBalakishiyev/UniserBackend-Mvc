@@ -23,7 +23,10 @@ namespace BusinessLogic.Mappers
                 .ForMember(x => x.InStock, s => s.MapFrom(y => y.Quantity > 0));
 
             CreateMap<Category, CategoryListDto>().ReverseMap();
-             
+
+            CreateMap<UserRegisterDto, User>()
+                .ForMember(x=>x.PasswordHash,s=>s.MapFrom(y=>y.Password))
+                .ReverseMap();
         }
     }
 }
